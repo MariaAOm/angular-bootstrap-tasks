@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-between align-items-start">
+  <div class="flex-grow-1">
+    <h5 class="mb-1">
+      {{ task?.name }} 
+      <span class="badge {{ badgeClass }} ms-2">{{ statusText }}</span>
+    </h5>
+    <p class="mb-1 text-muted">{{ task?.description }}</p>
+    <small class="text-muted">
+      ID: {{ task?.id }} | Prioridad: 
+      <!-- ngSwitch corregido -->
+      <span [ngSwitch]="task?.priority">
+        <span *ngSwitchCase="'alta'">🔴 Alta</span>
+        <span *ngSwitchCase="'media'">🟡 Media</span>
+        <span *ngSwitchCase="'baja'">🟢 Baja</span>
+        <span *ngSwitchDefault>⚪ Sin prioridad</span>
+      </span>
+    </small>
+  </div>
+  
+  <div class="ms-3">
+    <button 
+      class="btn btn-sm"
+      [class.btn-outline-success]="!task?.completed"
+      [class.btn-outline-secondary]="task?.completed"
+      (click)="toggleCompletion()">
+      {{ task?.completed ? '↶ Reabrir' : '✓ Completar' }}
+    </button>
+  </div>
+</div>

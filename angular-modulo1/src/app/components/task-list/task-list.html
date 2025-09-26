@@ -1,0 +1,71 @@
+<div class="card shadow-lg">
+  <div class="card-header bg-primary text-white">
+    <h2 class="h4 mb-0">📝 Lista de Tareas</h2>
+    <small class="opacity-75">
+      Completadas: {{ completedTasks() }} / {{ totalTasks() }}
+    </small>
+  </div>
+
+  <div class="card-body">
+    <!-- Formulario simplificado -->
+    <form #taskForm="ngForm" (ngSubmit)="addTask(taskForm)" class="mb-4">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Nombre de tarea</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="newTask.name"
+            name="taskName" 
+            required
+            placeholder="¿Qué necesitas hacer?">
+        </div>
+        
+        <div class="col-md-4">
+          <label class="form-label">Descripción</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="newTask.description"
+            name="taskDescription" 
+            required
+            placeholder="Detalles de la tarea">
+        </div>
+        
+        <div class="col-md-2">
+          <label class="form-label">Prioridad</label>
+          <select 
+            class="form-select" 
+            [(ngModel)]="newTask.priority"
+            name="priority">
+            <option value="alta">🔴 Alta</option>
+            <option value="media">🟡 Media</option>
+            <option value="baja">🟢 Baja</option>
+          </select>
+        </div>
+        
+        <div class="col-md-2 d-flex align-items-end">
+          <button 
+            type="submit" 
+            class="btn btn-success w-100"
+            [disabled]="!taskForm.valid">
+            ➕ Agregar
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Lista con *ngFor -->
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let task of tasks()">
+        <app-task-item [task]="task"></app-task-item>
+      </li>
+    </ul>
+
+    <!-- *ngIf corregido -->
+    <div *ngIf="tasks().length === 0" class="text-center py-4 text-muted">
+      <p class="h5">No hay tareas registradas</p>
+      <small>¡Agrega tu primera tarea usando el formulario superior!</small>
+    </div>
+  </div>
+</div>
