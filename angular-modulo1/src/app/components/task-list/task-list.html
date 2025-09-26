@@ -1,71 +1,78 @@
-<div class="card shadow-lg">
-  <div class="card-header bg-primary text-white">
-    <h2 class="h4 mb-0">📝 Lista de Tareas</h2>
-    <small class="opacity-75">
-      Completadas: {{ completedTasks() }} / {{ totalTasks() }}
-    </small>
+<div class="purple-shadow rounded-3">
+  <!-- Header  -->
+  <div class="purple-gradient text-white rounded-top-3 px-4 py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2 class="h5 mb-0 fw-normal"> Mis Tareas</h2>
+      <span class="badge bg-white text-purple-primary fw-normal">
+        {{ completedTasks() }}/{{ totalTasks() }}
+      </span>
+    </div>
   </div>
 
-  <div class="card-body">
-    <!-- Formulario simplificado -->
-    <form #taskForm="ngForm" (ngSubmit)="addTask(taskForm)" class="mb-4">
-      <div class="row g-3">
-        <div class="col-md-4">
-          <label class="form-label">Nombre de tarea</label>
+  <!-- Contenido -->
+  <div class="bg-white rounded-bottom-3">
+    <!-- Formulario  -->
+    <div class="p-4 border-bottom">
+      <form #taskForm="ngForm" (ngSubmit)="addTask(taskForm)" class="row g-2">
+        <div class="col-md-5">
           <input 
             type="text" 
-            class="form-control" 
+            class="form-control form-control-sm border-purple" 
             [(ngModel)]="newTask.name"
             name="taskName" 
             required
-            placeholder="¿Qué necesitas hacer?">
+            placeholder="Nueva tarea...">
         </div>
         
         <div class="col-md-4">
-          <label class="form-label">Descripción</label>
           <input 
             type="text" 
-            class="form-control" 
+            class="form-control form-control-sm border-purple" 
             [(ngModel)]="newTask.description"
             name="taskDescription" 
             required
-            placeholder="Detalles de la tarea">
+            placeholder="Descripción...">
         </div>
         
         <div class="col-md-2">
-          <label class="form-label">Prioridad</label>
           <select 
-            class="form-select" 
+            class="form-select form-select-sm border-purple" 
             [(ngModel)]="newTask.priority"
             name="priority">
-            <option value="alta">🔴 Alta</option>
-            <option value="media">🟡 Media</option>
-            <option value="baja">🟢 Baja</option>
+            <option value="alta">Alta</option>
+            <option value="media">Media</option>
+            <option value="baja">Baja</option>
           </select>
         </div>
         
-        <div class="col-md-2 d-flex align-items-end">
+        <div class="col-md-1">
           <button 
             type="submit" 
-            class="btn btn-success w-100"
-            [disabled]="!taskForm.valid">
-            ➕ Agregar
+            class="btn btn-sm purple-gradient text-white w-100"
+            [disabled]="!taskForm.valid"
+            title="Agregar tarea">
+            +
           </button>
         </div>
+      </form>
+    </div>
+
+    <!-- Lista de tareas minimalista -->
+    <div class="p-3">
+      <ul class="list-unstyled mb-0">
+        <li *ngFor="let task of tasks()" class="mb-2">
+          <app-task-item [task]="task"></app-task-item>
+        </li>
+      </ul>
+
+      <!-- Estado vacío minimalista -->
+      <div *ngIf="tasks().length === 0" class="text-center py-5">
+        <div class="text-muted mb-3">
+         
+        </div>
+        <p class="text-muted mb-1">No hay tareas</p>
+        <small class="text-muted">Agrega tu primera tarea arriba</small>
       </div>
-    </form>
-
-    <!-- Lista con *ngFor -->
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let task of tasks()">
-        <app-task-item [task]="task"></app-task-item>
-      </li>
-    </ul>
-
-    <!-- *ngIf corregido -->
-    <div *ngIf="tasks().length === 0" class="text-center py-4 text-muted">
-      <p class="h5">No hay tareas registradas</p>
-      <small>¡Agrega tu primera tarea usando el formulario superior!</small>
     </div>
   </div>
 </div>

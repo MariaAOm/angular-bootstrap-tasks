@@ -1,7 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
+:root {
+  --purple-primary: #6d28d9;
+  --purple-light: #8b5cf6;
+  --purple-dark: #5b21b6;
+  --purple-bg: #faf5ff;
+  --purple-border: #e9d5ff;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+}
+
 body {
-  background: linear-gradient(135deg, hsl(229, 69%, 86%) 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
   min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--text-dark);
+}
+
+.purple-gradient {
+  background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-light) 100%);
+}
+
+.purple-shadow {
+  box-shadow: 0 4px 6px -1px rgba(109, 40, 217, 0.1), 0 2px 4px -1px rgba(109, 40, 217, 0.06);
+}
+
+.purple-border {
+  border: 1px solid var(--purple-border);
 }

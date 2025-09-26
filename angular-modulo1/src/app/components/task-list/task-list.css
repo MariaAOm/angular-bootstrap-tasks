@@ -1,0 +1,13 @@
+.border-purple {
+  border: 1px solid var(--purple-border) !important;
+}
+
+.border-purple:focus {
+  border-color: var(--purple-light) !important;
+  box-shadow: 0 0 0 0.2rem rgba(109, 40, 217, 0.1) !important;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  background: var(--text-light) !important;
+}

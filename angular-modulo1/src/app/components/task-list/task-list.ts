@@ -35,7 +35,7 @@ export class TaskList {
     }
   ]);
 
-  // Usar un objeto simple en lugar de signal para newTask
+
   newTask = {
     name: '',
     description: '',
@@ -54,7 +54,7 @@ export class TaskList {
       
       this.tasks.update(tasks => [...tasks, newTask]);
       
-      // Reset del formulario
+    
       this.newTask.name = '';
       this.newTask.description = '';
       this.newTask.priority = 'media';

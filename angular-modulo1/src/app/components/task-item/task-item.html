@@ -1,29 +1,41 @@
-<div class="d-flex justify-content-between align-items-start">
+<div class="d-flex justify-content-between align-items-start p-3 purple-border rounded-3 bg-white transition-all">
   <div class="flex-grow-1">
-    <h5 class="mb-1">
-      {{ task?.name }} 
-      <span class="badge {{ badgeClass }} ms-2">{{ statusText }}</span>
-    </h5>
-    <p class="mb-1 text-muted">{{ task?.description }}</p>
+
+    <div class="d-flex align-items-center mb-2">
+      <h5 class="mb-0 me-2" 
+          [class]="task?.completed ? 'text-decoration-line-through text-muted' : 'text-purple'">
+        {{ task?.name }}
+      </h5>
+      <span class="badge rounded-pill px-2 {{ badgeClass }}">
+        {{ statusText }}
+      </span>
+    </div>
+    
+    <p class="mb-2 text-muted small" 
+       [class]="task?.completed ? 'text-decoration-line-through' : ''">
+      {{ task?.description }}
+    </p>
+    
+
     <small class="text-muted">
       ID: {{ task?.id }} | Prioridad: 
-      <!-- ngSwitch corregido -->
-      <span [ngSwitch]="task?.priority">
-        <span *ngSwitchCase="'alta'">🔴 Alta</span>
-        <span *ngSwitchCase="'media'">🟡 Media</span>
-        <span *ngSwitchCase="'baja'">🟢 Baja</span>
-        <span *ngSwitchDefault>⚪ Sin prioridad</span>
+      <span [ngSwitch]="task?.priority" class="fw-medium">
+        <span *ngSwitchCase="'alta'" class="text-danger"> Alta</span>
+        <span *ngSwitchCase="'media'" class="text-warning"> Media</span>
+        <span *ngSwitchCase="'baja'" class="text-success"> Baja</span>
+        <span *ngSwitchDefault class="text-secondary"> Sin prioridad</span>
       </span>
     </small>
   </div>
   
+  <!-- Botones -->
   <div class="ms-3">
     <button 
-      class="btn btn-sm"
-      [class.btn-outline-success]="!task?.completed"
-      [class.btn-outline-secondary]="task?.completed"
-      (click)="toggleCompletion()">
-      {{ task?.completed ? '↶ Reabrir' : '✓ Completar' }}
+      class="btn btn-sm border-0 purple-shadow"
+      [class]="task?.completed ? 'bg-light text-muted' : 'purple-gradient text-white'"
+      (click)="toggleCompletion()"
+      title="{{ task?.completed ? 'Reabrir tarea' : 'Completar tarea' }}">
+      {{ task?.completed ? '↶' : '✓' }}
     </button>
   </div>
 </div>

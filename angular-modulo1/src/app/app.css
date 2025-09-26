@@ -1,0 +1,8 @@
+.text-purple {
+  color: var(--purple-primary) !important;
+}
+
+.display-5 {
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
